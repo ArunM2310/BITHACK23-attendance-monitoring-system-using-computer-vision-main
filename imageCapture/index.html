@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Capture</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/25b9223bba.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+<div class="top-container">
+    <div class="top-container-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="SEARCH">
+    </div>
+    <h1>Attendance Monitoring System</h1>
+    <div class="profile-container">
+        <i class="fa-solid fa-calendar-days"></i>
+        <i class="fa-regular fa-bell"></i>
+        <img src="https://cdn3.iconfinder.com/data/icons/user-group-black/100/user-process-512.png" alt="" id="admin-profile-pic">
+    </div>
+</div>
+<div class="left-container">
+    <img src="https://upload.wikimedia.org/wikipedia/en/7/77/Bannari_Amman_Institute_of_Technology_logo.png" alt="">
+    <div class="icon-container">
+        <a href="/students"><i class="fa-solid fa-house"></i></a>
+        <a href="" class="live-icon"><i class="fa-solid fa-plus"></i></a>
+        <a href=""><i class="fa-solid fa-clock"></i></a>
+        <a href=""><i class="fa-solid fa-message"></i></a>
+        <a href=""><i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
+</div> 
+    <div class="video-container">
+        <video id="video" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <input type="text" id="imageNameInput" placeholder="Enter image name">
+        <button id="captureBtn">Capture and Save</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

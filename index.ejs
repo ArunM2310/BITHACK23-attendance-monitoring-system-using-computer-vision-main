@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/25b9223bba.js" crossorigin="anonymous"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">   
+</head>
+<body>
+    <div class="top-container">
+        <div class="top-container-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="SEARCH" id="search-input">
+        </div>
+        <h1>Attendance Monitoring System</h1>
+        <div class="profile-container">
+            <i class="fa-solid fa-calendar-days"></i>
+            <i class="fa-regular fa-bell"></i>
+            <img src="https://cdn3.iconfinder.com/data/icons/user-group-black/100/user-process-512.png" alt="" id="admin-profile-pic">
+        </div>
+    </div>
+    <div class="left-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/77/Bannari_Amman_Institute_of_Technology_logo.png" alt="">
+        <div class="icon-container">
+            <a href="" class="live-icon"><i class="fa-solid fa-house"></i></a>
+            <a href="http://127.0.0.1:7500/"><i class="fa-solid fa-plus"></i></a>
+            <a href="http://127.0.0.1:7500/studentss"><i class="fa-solid fa-clock"></i></a>
+            <a href=""><i class="fa-solid fa-message"></i></a>
+            <a href="http://127.0.0.1:7500/"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+    <div class="attendance-container">
+       <div class="registered-students-container">
+        <div class="attendance-title">
+            <div class="inner-container">
+                <h2>Attendance</h2>
+                <div class="inner-container-2">
+                    <p>Month -</p>
+                    <p id="display-month">January</p>
+                </div>
+            </div>
+            <div class="date-container">
+                <div class="date-container-desc">
+                    <p>Department</p>
+                    <select name="select" id="department-filter">
+                        <option value="select">Select</option>
+                        <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                        <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics and Communication Engineering">Electronics and Communication Engineering </option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Aeronautical Engineering">Aeronautical Engineering</option>
+                        <option value="Artificial Intelligence and Data Science">Artificial Intelligence and Data Science</option>
+                        <option value="Information Science Engineering">Information Science Engineering</option>
+                        <option value="Electrical and Instrumentation Engineering">Electrical and Instrumentation Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Agricultural Engineering">Agricultural Engineering</option>
+                        <option value="Bio-Technology">Bio-Technology</option>
+                    </select>
+                </div>
+                <div class="date-container-desc">
+                    <p>year</p>
+                    <select name="select" id="batch-filter">
+                        <option value="select">select</option>
+                        <option value="2020-2024">2020-2024</option>
+                        <option value="2021-2025">2021-2025</option>
+                        <option value="2022-2026">2022-2026</option>
+                        <option value="2023-2027">2023-2027</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="registered-students-card" id='registered-students'>
+            <% if(students.length > 0){ %>
+                <% for(let i=0;i<students.length;i++){ %>
+                    <div class="student-card" id="<%= students[i].rollnumber %>">
+                        <img src="<%- students[i].cloudinary_url %>" alt="" id="student-img-display">
+                        <p id="student-card-name" data-student-name>
+                            <%- students[i].name %>
+                        </p>
+                        <p id="student-roll" data-roll-number>
+                            <%- students[i].rollnumber %>
+                        </p>
+                        <p id="student-card-department" style="display: none;">
+                            <%- students[i].department %>
+                        </p>
+                        <p id="batch" style="display: none;">
+                            <%- students[i].batch %>
+                        </p>
+                        <div class="attendance-graph">
+                            <div class="present">
+                                <p id="present-days" data-present-days>100</p>
+                                <p>Present</p>
+                            </div>
+                            <div class="absent">
+                                <p id="absent-days" data-absent-days>0</p>
+                                <p>Absent</p>
+                            </div>
+                        </div>
+                        <button id="profile-details-button">Profile Details</button>
+                    </div>
+                    <div id="profile-details-container" class='<%= students[i].rollnumber %>'>
+                        <div id="profile-details" class="<%= students[i].rollnumber %>">
+                            <i class="fa-solid fa-x" id="profile-container-close-button"></i>
+                            <div class="profile-details-flex-container">
+                                <div class="profile-details-flex-upper">
+                                    <div class="top-profile-container">
+                                        <img src="<%- students[i].cloudinary_url %>" alt="" id="student-img-display-main">
+                                        <div class="profile-container-table">
+                                            <div class="profile-container-table-inner">
+                                                <h4> <%- students[i].name %> </h4>
+                                                <p> <%- students[i].designation %> </p>
+                                            </div>
+                                            <div class="profile-container-table-inner">
+                                                <h4>ROLL NUMBER</h4>
+                                                <p> <%- students[i].rollnumber %> </p>
+                                            </div>
+                                            <div class="profile-container-table-inner">
+                                                <h4>DEPARTMENT</h4>
+                                                <p> <%- students[i].department %> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-container-attendance-percentage">
+                                        <div class="present-days">
+                                            <h4>Number of days <br> Present</h4>
+                                            <h1>100%</h1>
+                                        </div>
+                                        <div class="absent-days">
+                                            <h4>Number of days <br> Absent</h4>
+                                            <h1>0%</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-details-flex-lower">
+                                    <h3>Attendance Progress</h3>
+                                </div>
+                            </div>
+                            <div class="profile-details-activity-container">
+                                <h3 id="tdyact">Today Activity</h3>
+                                <div class="profile-details-activity-bar-container">
+                                    <div class="activity-bar" id="student-activity-bar" data-roll="<%- students[i].rollnumber %>">
+                                        <div class="circle-bar" data-value="08:45"></div>                                        
+                                        <div class="line line-1" data-value="08:45"></div>
+                                        <div class="circle-bar" data-value="09:45"></div>
+                                        <div class="line line-1" data-value="09:45"></div>
+                                        <div class="circle-bar bar-1" data-value="10:30"></div>
+                                        <div class="line line-1" data-value="10:30"></div>
+                                        <div class="circle-bar bar-1" data-value="11:30"></div>
+                                        <div class="line line-1" data-value="11:30"></div>
+                                        <div class="circle-bar bar-1" data-value="12:30"></div>
+                                        <div class="line line-1" data-value="12:30"></div>
+                                        <div class="circle-bar bar-1" data-value="1:30"></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="period-bar">
+                                        <h3>check in</h3>
+                                        <h3>class I</h3>
+                                        <h3>class II</h3>
+                                        <h3>class III</h3>
+                                        <h3>class IV</h3>
+                                        <h3>class V</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <%} else { %>
+                <h1 id="error-h1" style="text-align: center;width: 100%;">Students data not found: 404</h1>
+            <% } %>
+        </div>
+       </div>
+       <div class="monitored-attendance-container">
+        <h1>Attendance List</h1>
+        <div class="attendance-display-container">
+            <table>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+                <% if(attendanceTable.length > 0) { %>
+                    <% for(let i=0;i<attendanceTable.length;i++) { %>
+                        <tr>
+                            <td> <%- attendanceTable[i].rollnumber %> </td>
+                            <td> <%- attendanceTable[i].name %> </td>
+                            <td> <%- attendanceTable[i].department %></td>
+                            <td> <%- attendanceTable[i].checkInDate %> </td>
+                            <td> <%- attendanceTable[i].checkInTime %> </td>
+                            <td> <%- attendanceTable[i].attendanceStatus %> </td>
+                        </tr>
+                        <% } %>
+                    <% } else { %>
+                    <h1>No records Found</h1>
+                    <% } %>
+            </table>
+        </div>
+       </div>
+    </div>
+    <style>
+        body 
+        {
+            font-family: 'Poppins', sans-serif;
+            background-color: #dde3ee;
+            overflow-x: hidden;
+        }
+        * 
+        {
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        .top-container 
+        {
+            height: 65px;
+            width: 100%;
+            background-color: white;
+            position: fixed;
+            padding-left: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 60px;
+        }
+        .top-container-search 
+        {
+            border:1px solid gray;
+            position: relative;
+            margin-left: 20px;
+            padding:5px;
+            border-radius: 5px;
+        }
+        .top-container-search input 
+        {
+            height: 30px;
+            border: none;
+            outline: none;
+            padding-left: 10px;
+            font-family: 'Poppins';
+        }
+        .top-container-search i 
+        {
+            cursor: pointer;
+            color: gray;
+        }
+        .top-container h1 
+        {
+            color: #4A5BE6;
+        }
+        .top-container .profile-container 
+        {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        #error-h1 
+        {
+            text-align: center;
+        }
+        .profile-container i 
+        {
+            font-size:25px;
+            color: gray;
+            cursor: pointer;
+        }
+        .profile-container i:hover 
+        {
+            color: black;
+        }
+        .profile-container #admin-profile-pic 
+        {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .left-container img 
+        {
+            height: 45px;
+            margin:10px;
+        }
+        .left-container 
+        {
+            height: 100vh;
+            width: 65px;
+            background-color: white;
+            position: fixed;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        .icon-container a 
+        {
+            text-decoration: none;
+            color:gray;
+            font-size: 25px;
+            transition: all 100ms ease-in-out;
+        }
+        .icon-container a:hover 
+        {
+            color:black;
+        }
+        .left-container .icon-container 
+        {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            gap: 20px;
+        }
+        .attendance-container
+        {
+            height: 100vh;
+            width: 100vw;
+            padding:100px 30px 0px 100px;
+        }
+        .attendance-title
+        {
+            display: flex;
+            justify-content: space-between;
+        }
+        .attendance-container .inner-container 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .live-icon 
+        {
+            color:black !important;
+        }
+        .inner-container-2 
+        {
+            display: flex;
+            gap: 5px;
+            padding-top: 3px;
+        }
+        .date-container 
+        {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .date-container select 
+        {
+            height: 30px;
+            width: 100px;
+            border:1px solid;
+            padding:5px;
+        }
+        .date-container-desc 
+        {
+            display: flex;
+            gap: 15px;
+        }
+        .registered-students-card
+        {
+            height: 350px;
+            overflow: scroll;
+            width: 100%;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-row-gap: 30px;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+        .student-card 
+        {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 320px;
+            width: 230px;
+            align-items: center;
+            row-gap: 20px;
+            padding:20px;
+            background-color: white;
+            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.20);
+            border-radius: 10px;
+        }
+        #student-profile 
+        {
+            height: 60px;
+            width: 60px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;   
+        }
+        #student-card-name 
+        {
+            font-size: 18px;
+        }
+        #student-roll 
+        {
+            font-size: 15px;
+            color:gray;
+        }
+        .attendance-graph 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .present 
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #present-days 
+        {
+            background-color: #d8e4f7;
+            height: 40px;
+            width: 40px;
+            padding:3px;
+            display: flex;
+            align-items: center;
+            border-radius: 50%;
+        }
+        .absent 
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #absent-days 
+        {
+            background-color: #7ADEE4;
+            height: 40px;
+            width: 40px;
+            padding:13px;
+            display: flex;
+            align-items: center;
+            border-radius: 50%;
+           
+        }
+        #profile-details-button 
+        {
+            width: 100%;
+            height: 40px;
+            font-family: 'Open sans',sans-serif;
+            border: 1px solid;
+            color:#38A8AF;
+            background-color: transparent;
+            border-radius: 20px;
+            transition: all 200ms ease-in-out;
+            cursor: pointer;
+        }
+        #profile-details-button:hover 
+        {
+            background-color: #38A8AF;
+            color:white;
+        }
+        #profile-details-container 
+        {
+            background-color: rgba(42, 52, 132, 0.80);
+            height: 100vh;
+            width: 100vw;
+            top:0;
+            left:0;
+            position: fixed;
+            place-items: center;
+            display:none;
+        }
+        #profile-details 
+        {
+            height: 600px;
+            width: 1200px;
+            background-color: white;
+            border-radius: 40px;
+            animation: fade-up 300ms linear;
+            transition: 300ms ease-in-out;
+            position: relative;
+        }
+        #profile-container-close-button
+        {
+            position: absolute;
+            right: -10px;
+            top:-10px;
+            color:white;
+            cursor: pointer;
+        }
+        @keyframes fade-up 
+        {
+            from 
+            {
+                top:1000px;
+            }
+            to 
+            {
+                top:0;
+            }
+        }
+        #department-filter 
+        {
+            width: 200px;
+        }
+        ::-webkit-scrollbar {
+            width: 2px;  
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+        background-color: #888;  
+        }
+
+        ::-webkit-scrollbar-track {
+        height: 0;
+        width: 0px;  
+
+        }
+        .monitored-attendance-container 
+        {
+            font-size: 12px;
+            margin-top: 30px;
+        }
+        .attendance-display-container 
+        {
+            width: 88vw;
+            margin-top: 30px;
+            background-color: white;
+            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+        table {
+        font-family: 'Poppins',sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+        tr 
+        {
+            font-size: 15px;
+        }
+        td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        }
+        th 
+        {
+            color:rgb(111, 109, 109) !important;
+        }
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+        #profile-details 
+        {
+            display: flex;
+            padding:20px;
+            background-color: #dde3ee;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-details-activity-container 
+        {
+            width: 25%;
+            height: 89%;
+            border-radius: 20px;
+            background-color: white;
+        }
+        .profile-details-flex-container 
+        {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-details-flex-upper 
+        {
+            width: 98%;
+            height: 35%;
+            background-color: white;
+            margin: 10px;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-details-flex-lower 
+        {
+            width: 98%;
+            height: 50%;
+            background-color: white;
+            margin: 10px;
+            border-radius: 20px;
+        }
+        #profile-details-fade-profile 
+        {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+        .profile-container-table 
+        {
+            display: flex;
+            width: 80%;
+            justify-content: space-around;
+
+        }
+        .profile-container-table-inner p 
+        {
+            color: gray;
+            margin-top: 8px;
+        }
+        .top-profile-container img 
+        {
+            width:30%;
+        }
+        .top-profile-container 
+        {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .profile-container-attendance-percentage 
+        {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        .present-days, .absent-days
+        {
+            display: flex;
+        }
+        .present-days h4 
+        {
+            margin-right: 20px;
+        }
+        .present-days h1 
+        {
+            color:green;
+        }
+        .absent-days h1 
+        {
+            color:red;
+        }
+        .absent-days h4 
+        {
+            margin-right: 20px;
+        }
+        .profile-details-flex-lower 
+        {
+            padding:20px;
+        }
+        #attendanceCanvas 
+        {
+            font-family: 'Poppins', sans-serif;
+        }
+        .profile-details-activity-container 
+        {
+            padding:10px;
+        }
+        .profile-details-activity-bar-container 
+        {
+            display: flex;
+            height: 100%;
+            column-gap: 50px;
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+        .activity-bar 
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .circle-bar 
+        {
+            height: 40px;
+            width: 40px;
+            background-color: #38A8AF;
+            border-radius: 50%;
+        }
+        .line 
+        {
+            height: 35px;
+            width: 5px;
+            background-color: #38A8AF;
+        }
+        .period-bar 
+        {
+            display: flex;
+            flex-direction: column;
+            row-gap: 47px;
+        }
+        #tdyact 
+        {
+            padding-left: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+              //form 
+      
+    function preventBack(){
+    window.history.forward() ;
+} 
+setTimeout("preventBack()",0);
+window.onunload =function(){null};
+        console.clear();
+
+        //Registered Student Container 
+
+        const displayMonth = document.getElementById('display-month');
+        const months = ['January','February','March','April','May','June','July','August','September','Octomber','Novumber','December'];
+        const date = new Date();
+        const currentMonth = months[date.getMonth()];
+        displayMonth.textContent = currentMonth;
+
+
+        //search bar 
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', ()=>{
+            const studentCards = document.querySelectorAll('.student-card');
+            studentCards.forEach(student => {
+            })
+        })
+
+        const studentCardTemplate= document.querySelector('[data-student-card-template]');
+
+        
+        function addStudentFunction(name,roll)
+        {
+            const profileCardContainer = document.getElementById('registered-students');
+            const studentCard = studentCardTemplate.content.cloneNode(true).querySelector('.student-card')
+            const studentName = studentCard.querySelector('[data-student-name]');
+            const rollNumber = studentCard.querySelector('[data-roll-number]');
+
+            studentName.textContent = name;
+            rollNumber.textContent = roll;
+
+            profileCardContainer.appendChild(studentCard);
+        }
+        //search bar function
+        
+
+        const studentCards = document.querySelectorAll('.student-card');
+        const search = document.getElementById('search-input');
+
+        search.oninput = () => {
+            console.clear()
+            studentCards.forEach(studentCard => {
+               studentCard.style.display = 'flex';
+               const name = studentCard.getElementsByTagName('p')[0].innerText.toLowerCase();
+               const rollnumber = studentCard.getElementsByTagName('p')[1].innerText;
+               const searchValue = search.value.toLowerCase();
+               if(!(name.indexOf(searchValue) > -1))
+               {
+                studentCard.style.display = 'none';
+               }
+            })
+        }
+
+        //profile details button
+        const profileButton = document.querySelectorAll('#profile-details-button');
+        const profileContainerCloseButton = document.querySelectorAll('#profile-container-close-button');
+        const profileDetailsContainer = document.querySelectorAll('#profile-details-container');
+        profileButton.forEach(button => {
+            button.addEventListener('click', ()=> {
+                const studentCard = button.parentNode;
+                profileDetailsContainer.forEach(profile => {
+                    if(profile.className === studentCard.id)
+                    {
+                        profile.style.display = 'grid';
+                    }
+                })
+            })
+        })
+        profileContainerCloseButton.forEach(button => {
+            button.addEventListener('click', ()=>{
+                profileDetailsContainer.forEach(profile => {
+                    profile.style.display = 'none';
+                })
+            })
+        })
+
+        //department filter 
+        const departmentFilter = document.getElementById('department-filter');
+        departmentFilter.addEventListener('change',()=>{
+            studentCards.forEach(studentCard => {
+                studentCard.style.display = 'flex';
+                const department = studentCard.getElementsByTagName('p')[2];
+                const departmentName = department.innerHTML.trim();
+                if(departmentFilter.value === 'select')
+                {
+                    studentCard.style.display = 'flex';
+                }
+                else if(departmentName != departmentFilter.value)
+                {
+                    studentCard.style.display = 'none';
+                }
+            })
+        })
+
+        //batch filter 
+        const batchFilter = document.getElementById('batch-filter');
+        batchFilter.addEventListener('change', ()=> {
+            studentCards.forEach(studentCard => {
+                const batchValue = studentCard.getElementsByTagName('p')[3].innerHTML.trim();
+
+                if(batchFilter.value === 'select') {
+                    studentCard.style.display = 'flex';
+                }
+                else if(batchValue !== batchFilter.value) {
+
+                    studentCard.style.display = 'none';
+                }
+                else {
+                    studentCard.style.display = 'flex';
+                }
+            })
+        })
+        // chart js  
+
+        function developChart() {
+            const chart = document.createElement('canvas');
+            chart.setAttribute('id','attendanceChart');
+            chart.setAttribute('height',200);
+            chart.setAttribute('width',700);
+            // chart.style.border = '2px solid red'
+            return chart;
+        }
+
+        const AttendanceChartContainer = document.querySelectorAll('.profile-details-flex-lower');
+        AttendanceChartContainer.forEach(AttendanceChart => {
+            const chart = developChart();
+            AttendanceChart.appendChild(chart)
+        })
+
+        
+        //Activity Bar
+
+        const ActivityBarMain = document.querySelectorAll('.activity-bar')
+        ActivityBarMain.forEach(activityBar => {
+            const barsCollection = activityBar.getElementsByTagName('div');
+            const bars = Array.from(barsCollection)
+            bars.forEach(bar => {
+                const periodTime = bar.getAttribute('data-value');
+
+                const currentTime = getCurrentTime();
+                if(currentTime > periodTime) {
+                    bar.style.backgroundColor = 'red';
+                }
+            })
+        })
+
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2,'0');
+            const minutes = now.getMinutes().toString().padStart(2,'0');
+            return `${hours}:${minutes}`
+        }
+        const getTime = getCurrentTime();
+
+        //Attendance Status Bar
+
+        const activityBarContainer = document.querySelectorAll('.activity-bar');
+
+        const activityBar = [];
+
+        activityBarContainer.forEach(bar => {
+            const bars = bar.querySelectorAll('div');
+            activityBar.push(bars);
+        })
+
+        const checkInTimeDatas = [];
+
+        '<% attendanceTable.forEach((attendance) => { %>'
+            checkInTimeDatas.push('<%- attendance.checkInTime %>');
+        '<% }) %>'
+
+        for(let i=0;i<checkInTimeDatas.length;i++) {
+            if(checkInTimeDatas[i] === '') continue;
+
+            const [hours, minutes] = checkInTimeDatas[i].split(':')
+            console.log(hours + " " + minutes)
+
+            if((hours==8 && (minutes>=0 && minutes<=45) || (hours==9 && (minutes>=0 && minutes<=45)))) {
+                activityBar[i][0].style.backgroundColor = 'green';
+                activityBar[i][1].style.backgroundColor = 'green'
+            }
+            if((hours==9 && (minutes>=45 && minutes<=60) || (hours==10 && (minutes>=0 && minutes<=30)))) {
+                activityBar[i][2].style.backgroundColor = 'green';
+                activityBar[i][3].style.backgroundColor = 'green'
+            }
+            if((hours==10 && (minutes>=45 && minutes<=60) || (hours==11 && (minutes>=0 && minutes<=30)))) {
+                activityBar[i][4].style.backgroundColor = 'green';
+                activityBar[i][5].style.backgroundColor = 'green'
+            }
+            if((hours==11 && (minutes>=30 && minutes<=60) || (hours==12 && (minutes>=0 && minutes<=30)))) {
+                activityBar[i][6].style.backgroundColor = 'green';
+                activityBar[i][7].style.backgroundColor = 'green'
+            }
+            if((hours==12 && (minutes>=45 && minutes<=60) || (hours==1 && (minutes>=0 && minutes<=30)))) {
+                activityBar[i][8].style.backgroundColor = 'green';
+                activityBar[i][9].style.backgroundColor = 'green';
+            }
+            if((hours==1 && (minutes>=30 && minutes<=60) || (hours==2 && (minutes>=0 && minutes<=30)))) {
+                activityBar[i][10].style.backgroundColor = 'green';
+            }
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login system with nodejs and mysql database</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin="crossorigin">
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- <section class="box">
+        <div class="design">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="form">
+            <h2>User Login</h2>
+            <form action="/" method="POST">
+                <input type="email" name="username" class="input-field" placeholder="Username" />
+                <input type="password" name="password" class="input-field" placeholder="Password" />
+                <input type="submit" class="btn" value="LOGIN">
+            </form>
+        </div>
+    </section> -->
+    <div class="container">
+        <div class="logo">
+            <div class="title">
+                <p>Attendance Monitoring
+                    <br>System</p>
+                <img
+                    src="assets/admin_logo.png"
+                    alt=""
+                    height="530px"
+                    width="500px"
+                    id="admin-logo">
+            </div>
+        </div>
+        <div class="details">
+            <img src="assets/BIT.png" alt="" class="bit-logo">
+            <div class="innerbox">
+                <p class="create">Login</p>
+
+                <div class="login">
+                    <form action="/" method="POST" id="form" autocomplete="off">
+                    <!-- <form action="" method="post" id="form" autocomplete="off"> -->
+                        <div class="email">
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="Username">
+                            <div class="error"></div>
+                        </div>
+                        <div class="pass" style="color: red ;height:10px;width:100%">
+                            <input type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+                          
+                            <i class="fa-solid fa-eye" id="eyeicon"></i>
+                            <div class="error"></div>
+                        </div>
+                        <button type="submit" name="submit" class="btn">Login</button>
+                        
+                    </form>
+                    <a s href="http://localhost:7500/auth/google"> 
+                        <img  src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" alt="Sign in with Google">
+                    </a>
+                   
+                </div>
+                
+                <!-- <p class="or">-OR-</p> <div class="buttons"> <button><img
+                src="Google_logo.png" alt="" height="22px" width="22px"> Sign in with
+                Google</button> <!-- <button><img src="Phone_logo.png" alt="" height="22px"
+                width="22px"> Sign in with Phone</button> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+    
+        //form 
+      
+    function preventBack(){
+    window.history.forward() ;
+} 
+setTimeout("preventBack()",0);
+window.onunload =function(){null};
+
+
+let eyeicon=document.getElementById("eyeicon");
+
+let eyeicon2=document.getElementById("eyeicon2");
+let password1=document.getElementById("password");
+let password2=document.getElementById("confirmpassword");
+
+
+eyeicon.onclick=function(){
+if(password1.type == "password"){
+    password1.type ="text";
+    eyeicon.src ="eye-open.png";
+}else{
+    password1.type = "password";
+    eyeicon.src ="eye-close.png";
+}
+eyeicon2.onclick=function(){
+if(password2.type == "password"){
+    password2.type ="text";
+    eyeicon.src ="eye-open.png";
+}else{
+    password2.type = "password";
+    eyeicon.src ="eye-close.png";
+}
+
+}  
+}  
+
+
+const form = document.querySelector('#form')
+            const username = document.querySelector('#username');
+            const password = document.querySelector('#password');
+
+            form.addEventListener('submit', (e) => {
+
+                if (!validateInputs()) {
+                    e.preventDefault();
+                }
+            })
+
+            function validateInputs() {
+                const usernameVal = username
+                    .value
+                    .trim()
+
+                const passwordVal = password
+                    .value
+                    .trim();
+
+                let success = true
+
+                if (usernameVal === '') {
+                    success = false;
+                    setError(username, '*Username is required')
+                } else {
+                    setSuccess(username)
+                }
+
+                if (passwordVal === '') {
+                    success = false;
+                    setError(password, '*Password is required')
+                } else if (passwordVal.length < 4) {
+                    success = false;
+                    setError(password, '*Password must be atleast 4 characters long')
+                } else {
+                    setSuccess(password)
+                }
+
+                return success;
+
+            }
+            //element - password, msg- pwd is reqd
+            function setError(element, message) {
+                const inputGroup = element.parentElement;
+                const errorElement = inputGroup.querySelector('.error')
+
+                errorElement.innerText = message;
+                inputGroup
+                    .classList
+                    .add('error')
+                inputGroup
+                    .classList
+                    .remove('success')
+            }
+
+            function setSuccess(element) {
+                const inputGroup = element.parentElement;
+                const errorElement = inputGroup.querySelector('.error')
+
+                errorElement.innerText = '';
+                inputGroup
+                    .classList
+                    .add('success')
+                inputGroup
+                    .classList
+                    .remove('error')
+            }
+           
+</script>
+
+
+</body>
+</html>

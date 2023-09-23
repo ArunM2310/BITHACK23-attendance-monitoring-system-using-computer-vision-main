@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" href="student.css">
+    <script src="student.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/25b9223bba.js" crossorigin="anonymous"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div id="toast-box"></div>
+    <div class="top-container">
+        <div class="top-container-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="SEARCH">
+        </div>
+        <h1>Attendance Monitoring System</h1>
+        <div class="profile-container">
+            <i class="fa-solid fa-calendar-days"></i>
+            <i class="fa-regular fa-bell"></i>
+            <img src="https://cdn3.iconfinder.com/data/icons/user-group-black/100/user-process-512.png" alt="" id="admin-profile-pic">
+        </div>
+    </div>
+    <div class="left-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/77/Bannari_Amman_Institute_of_Technology_logo.png" alt="">
+        <div class="icon-container">
+            <a href="http://127.0.0.1:7500/students"><i class="fa-solid fa-house"></i></a>
+            <a href="http://127.0.0.1:7500/studentss" class="live-icon"><i class="fa-solid fa-plus"></i></a>
+            <a href=""><i class="fa-solid fa-clock"></i></a>
+            <a href=""><i class="fa-solid fa-message"></i></a>
+            <a href="http://127.0.0.1:7500/"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div> 
+    <div class="add-student-container">
+        <div class="add-student-details">
+            <h2>Add new Student</h2>
+            <form action="/route/login" method="POST" id="student-form" >
+                <div class="information-container">
+                    <div class="student-name-grid grid">
+                        <label for="">Student Name</label>
+                        <div class="input-field">
+                            <input type="text" id="student_name" name="name">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-roll-grid grid">
+                        <label for="">Roll Number</label>
+                        <div class="input-field">
+                            <input type="text" id="roll_number" name="rollnumber">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-designation-grid grid">
+                        <label for="" style="padding-right: 20px;">Designation</label>
+                        <div class="input-field">
+                            <input type="text" id="designation" name="designation">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-department-grid grid">
+                        <label for="">Department</label>
+                        <div class="input-field">
+                            <select id="department" name="department">
+                                <option value="N/A">N/A</option>
+                                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electrical and Communication Engineering">Electrical and Communication Engineering</option>
+                                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            </select>
+                            <span id="error-message"></span>
+                        </div>
+                    </div>
+                    <div class="student-gender-grid grid">
+                        <label for="" style="padding-right: 42px;">Gender</label>
+                        <div class="input-field">
+                            <select id="gender" name="gender">
+                                <option value="N/A">N/A</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-batch-grid grid">
+                        <label for="" style="padding-right: 70px;">Batch</label>
+                        <div class="input-field">
+                            <select id="batch" name="batch">
+                                <option value="N/A">N/A</option>
+                                <option value="2020-2024">2020-2024</option>
+                                <option value="2020-2024">2021-2025</option>
+                                <option value="2020-2024">2022-2026</option>
+                                <option value="2020-2024">2023-2027</option>
+                            </select>
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-class-grid grid">
+                        <label for="" style="padding-right: 60px;">Class</label>
+                        <div class="input-field">
+                            <input type="text" id="student_class" name="studentclass">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-id-grid grid">
+                        <label for="" style="padding-right: 85px;">Id</label>
+                        <div class="input-field">
+                            <input type="text" id="student_id" name="studentID">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-date-grid grid">
+                        <label for="" style="padding-right: 80px;">DOB</label>
+                        <div class="input-field">
+                            <input type="text" id="student_dob" name="dob">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-branch-grid grid">
+                        <label for="" style="padding-right: 55px;">Email</label>
+                        <div class="input-field">
+                            <input type="email" id="email" name="email">
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                    <div class="student-degree-grid grid">
+                        <label for="" style="margin-right: -8px;">Degree Level</label>
+                        <div class="input-field">
+                            <select id="degree-level" name="degreelevel">
+                                <option value="N/A">N/A</option>
+                                <option value="Under Graduate">Under Graduate</option>
+                                <option value="Post Graduate">Post Graduate</option>
+                                <option value="Master of Business Adminitrative">Master of Business Adminitrative</option>
+                                <option value="Bachelor of Arts">Bachelor of Arts</option>
+                            </select>
+                            <span id="error-message">error</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btns-container">
+                    <div class="button-container">
+                        <button id="btn">
+                            <a href="http://localhost:5501/imageCapture/" target="_blank">capture</a>
+                        </button>
+                    </div>
+                <div class="button-container">
+                    <input type="submit" value="Submit" id="details-button">
+                </div>
+                
+            </form>
+        </div>
+    </div>  
+    <script>
+        //form 
+      
+    function preventBack(){
+    window.history.forward() ;
+} 
+setTimeout("preventBack()",0);
+window.onunload =function(){null};
+
+
+
+////////////////////////////////
+$(document).ready(function(){
+   console.log('Hi ready');
+
+//    $('#form_rest').click(function(e){
+//     e.preventDefault();
+//     $('#student-form')[0].reset();
+//    })
+
+   $(function(){
+   $('#student_name').autocomplete({
+
+    source: [{
+      label: "Arun",
+      roll_number:"201EE115",
+      designation:"Student",
+      student_class: "EEE",
+      student_id:"20102",
+      student_dob:"23/10/2002",
+      gender:"male",
+      department:"EEE",
+      email: "travis@music.com",
+    }, {
+        label: "kipsan",
+      roll_number:"201EE115",
+      designation:"Student",
+      student_class: "EEE",
+      student_id:"20102",
+      student_dob:"23/10/2002",
+      email: "travis@music.com",
+    },{
+        label: "Sudharsan",
+      roll_number:"201EE115",
+      designation:"Student",
+      student_class: "EEE",
+      student_id:"20102",
+      student_dob:"23/10/2002",
+      email: "travis@music.com",
+    },{
+        label: "Ameer",
+      roll_number:"201EE115",
+      designation:"Student",
+      student_class: "EEE",
+      student_id:"20102",
+      student_dob:"23/10/2002",
+      gender:"male",
+      email: "travis@music.com",
+    }],
+
+    select: function(e, ui){
+        $('#student_name').val(ui.item.label);
+        $('#roll_number').val(ui.item.roll_number);
+        $('#designation').val(ui.item.designation);
+        $('#student_class').val(ui.item.student_class);
+        $('#student_id').val(ui.item.student_id);
+        $('#student_dob').val(ui.item.student_dob);
+        $('#gender').val(ui.item.gender);
+        $('#email').val(ui.item.email);
+        $('#department').val(ui.item.department);
+        return false;
+    }
+   });
+   });
+    });
+    //form submission
+    const studentName = document.getElementById('student_name');
+    const rollNumber = document.getElementById('roll_number');
+    const designation = document.getElementById('designation');
+    const department = document.getElementById('department');
+    const gender = document.getElementById('gender');
+    const batch = document.getElementById('batch');
+    const studentClass = document.getElementById('student_class');
+    const studentId = document.getElementById('student_id');
+    const dob = document.getElementById('student_dob');
+    const email = document.getElementById('email');
+    const degree = document.getElementById('degree_level');
+    const submitButton = document.getElementById('details-button');
+    let checker = [];
+    for(let i=0;i<11;i++) checker.push(false);
+    const studentObject = [];
+
+    submitButton.addEventListener('click', (e)=> {
+        if(studentName.value === '')
+        {
+            const errorMessage = studentName.nextElementSibling;
+            studentName.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid name';
+            checker[0] = false;
+        }
+        else 
+        {
+            studentName.style.border = '1px solid gray';
+            const errorMessage = studentName.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[0] = true;
+        }
+        if(rollNumber.value === '')
+        {
+            const errorMessage = rollNumber.nextElementSibling;
+            rollNumber.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid rollnumber';
+            checker[1] = false;
+        }
+        else 
+        {
+            rollNumber.style.border = '1px solid gray';
+            const errorMessage = rollNumber.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[1] = true;
+        }
+        if(designation.value === '')
+        {
+            const errorMessage = designation.nextElementSibling;
+            designation.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid designation';
+            checker[2] = false;
+        }
+        else 
+        {
+            designation.style.border = '1px solid gray';
+            const errorMessage = designation.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[2] = true;
+        }
+        if(department.value === 'N/A')
+        {
+            const errorMessage = department.nextElementSibling;
+            department.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid department';
+            checker[3] = false;
+        }
+        else 
+        {
+            department.style.border = '1px solid gray';
+            const errorMessage = department.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[3] = true;
+        }
+        if(gender.value === 'N/A')
+        {
+            const errorMessage = gender.nextElementSibling;
+            gender.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid gender';
+            checker[4] = false;
+        }
+        else 
+        {
+            gender.style.border = '1px solid gray';
+            const errorMessage = gender.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[4] = true;
+        }
+        if(batch.value === 'N/A')
+        {
+            const errorMessage = batch.nextElementSibling;
+            batch.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid batch';
+            checker[5] = false;
+        }
+        else 
+        {
+            batch.style.border = '1px solid gray';
+            const errorMessage = batch.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[5] = true;
+        }
+        if(studentClass.value === "")
+        {
+            const errorMessage = studentClass.nextElementSibling;
+            console.log(errorMessage)
+            studentClass.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid class';
+            checker[6] = false;
+        }
+        else 
+        {
+            studentClass.style.border = '1px solid gray';
+            const errorMessage = studentClass.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[6] = true;
+        }
+        if(studentId.value === "")
+        {
+            const errorMessage = studentId.nextElementSibling;
+            studentId.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid id';
+            checker[7] = false;
+        }
+        else 
+        {
+            studentId.style.border = '1px solid gray';
+            const errorMessage = studentId.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[7] = true;
+        }
+        if(dob.value === "")
+        {
+            const errorMessage = dob.nextElementSibling;
+            dob.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid DOB';
+            checker[8] = false;
+        }
+        else 
+        {
+            dob.style.border = '1px solid gray';
+            const errorMessage = dob.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[8] = true;
+        }
+        if(email.value === "")
+        {
+            const emailRegex = /^[a-zA-Z0-9._-]+@bitsathy\.ac\.in$/;
+            const errorMessage = email.nextElementSibling;
+            email.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid email';
+            checker[9] = false;
+        }
+        else 
+        {
+            email.style.border = '1px solid gray';
+            const errorMessage = email.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[9] = true;
+        }
+        if(degree.value === "N/A")
+        {
+            const errorMessage = degree.nextElementSibling;
+            degree.style.border = '1px solid red'
+            errorMessage.style.visibility = 'visible';
+            errorMessage.textContent = 'Invalid degree';
+            checker[10] = false;
+        }
+        else 
+        {
+            degree.style.border = '1px solid gray';
+            const errorMessage = degree.nextElementSibling;
+            errorMessage.style.visibility = 'hidden';
+            checker[10] = true;
+        }
+        for(let i=0;i<11;i++)
+        {
+            if(checker[i] === false) return;
+        }
+        showToast(successMessage);
+    });
+
+    function removeValuesfunction()
+    {
+        const values = document.querySelectorAll('input');
+        const selectValues = document.querySelectorAll('select');
+        values.forEach(valueField => {
+            valueField.value = '';
+        })
+        selectValues.forEach(selectValue => {
+            selectValue.value = 'N/A'
+        })
+    }
+
+    const toastBox = document.getElementById('toast-box')
+    const successMessage = '<i class="fa-solid fa-circle-check"></i> sucessfully submitted';
+
+    function showToast(message)
+    {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.innerHTML = message;
+    toastBox.appendChild(toast)
+    
+    setTimeout(() => {
+        toast.remove()
+    },6000)
+    }
+    </script>
+    <style>
+        body 
+{
+    font-family: 'Poppins', sans-serif;
+    background-color: #dde3ee;
+    color:black;
+}
+* 
+{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+.top-container 
+{
+    height: 65px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    padding-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 60px;
+}
+.top-container-search 
+{
+    border:1px solid gray;
+    position: relative;
+    margin-left: 20px;
+    padding:5px;
+    border-radius: 5px;
+}
+.top-container-search input 
+{
+    height: 30px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-family: 'Poppins';
+}
+.top-container-search i 
+{
+    cursor: pointer;
+    color: gray;
+}
+.top-container h1 
+{
+    color: #4A5BE6;
+}
+.top-container .profile-container 
+{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.profile-container i 
+{
+    font-size:25px;
+    color: gray;
+    cursor: pointer;
+}
+.profile-container i:hover 
+{
+    color: black;
+}
+.profile-container #admin-profile-pic 
+{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.left-container img 
+{
+    height: 45px;
+    margin:10px;
+}
+.left-container 
+{
+    height: 100vh;
+    width: 65px;
+    background-color: white;
+    position: fixed;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.icon-container a 
+{
+    text-decoration: none;
+    color:gray;
+    font-size: 25px;
+    transition: all 100ms ease-in-out;
+}
+.icon-container a:hover 
+{
+    color:black;
+}
+.left-container .icon-container 
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+}
+.attendance-container
+{
+    height: 100vh;
+    width: 100vw;
+    padding:100px 30px 0px 100px;
+}
+.attendance-title
+{
+    display: flex;
+    justify-content: space-between;
+}
+.attendance-container .inner-container 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+.live-icon 
+{
+    color:black !important;
+}
+.inner-container-2 
+{
+    display: flex;
+    gap: 5px;
+    padding-top: 3px;
+}
+.date-container 
+{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.date-container select 
+{
+    height: 30px;
+    width: 100px;
+    border:1px solid;
+    padding:5px;
+}
+.date-container-desc 
+{
+    display: flex;
+    gap: 15px;
+}
+.add-student-container 
+{
+    background-color: #dde3ee;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    padding:100px 30px 0px 100px;
+    display: grid;
+    place-items: center;
+}
+.add-student-details 
+{
+    height: 90%;
+    width: 90%;
+    padding:30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.20);
+}
+.information-container 
+{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    padding:50px;
+    grid-row-gap: 30px;
+    grid-column-gap: 20px;
+}
+.student-name-grid 
+{
+    grid-column: 1/ span 2;
+}
+.grid 
+{
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    align-items: flex-start;
+    font-family: 'Montserrat', sans-serif;
+}
+.grid input 
+{
+    height: 30px;
+    width: 175px;
+    border-radius: 3px;
+    outline: none;
+    border:1px solid gray;
+    padding:5px;
+    font-family: 'Montserrat', sans-serif;
+    color:black;
+}
+.student-name-grid input 
+{
+    width: 530px;
+}
+.button-container 
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.btns-container 
+{
+    display: flex;
+}
+#details-button a 
+{
+    color:white;
+    text-decoration: none;
+}
+#btn 
+{
+    height: 40px;
+    width: 200px;
+    border:1px solid gray;
+    background-color: #4A5BE6;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 40px;
+    outline: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 100ms ease-in-out;
+}
+#btn a 
+{
+    color:white;
+    text-decoration: none;
+}
+#details-button 
+{
+    height: 40px;
+    width: 200px;
+    border:1px solid gray;
+    background-color: #4A5BE6;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 40px;
+    outline: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+}
+.input-field 
+{
+    display: flex;
+    flex-direction: column;
+}
+.input-field span 
+{
+    color:red;
+    font-family: sans-serif;
+    visibility: hidden;
+}
+.error-input 
+{
+    border:1px solid red !important;
+}
+.submitted-button 
+{
+    background-color: rgb(45, 225, 45) !important;
+}
+#details-button:hover 
+{
+    background-color: #6575f0;
+}
+#department, #batch, #degree-level, #branch-type
+{
+    height: 30px;
+    width: 175px;
+    background-color: #fff;
+    outline:none;
+    border:1px solid gray;
+    border-radius: 3px;
+    padding:3px;
+}
+#gender 
+{
+    height: 30px;
+    width: 175px;
+    background-color: #fff;
+    border:1px solid gray;
+    border-radius: 3px;
+    padding:3px;
+}
+select, option 
+{
+    font-family: 'Montserrat',sans-serif;
+}
+body 
+{
+  background-color:#F7EDFF;
+  font-family: 'Poppins', sans-serif;
+}
+*
+{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+.buttons
+{
+  margin:50px;
+}
+.buttons button 
+{
+  background-color:#333;
+  color:#FFF;
+  border:0;
+  outline:0;
+  width:120px;
+  height:40px;
+  margin:5px;
+  cursor:pointer;
+}
+#toast-box 
+{
+  position:absolute;
+  bottom:30px;
+  right:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  overflow:hidden;
+  padding:20px;
+}
+.toast 
+{
+  width:400px;
+  height:80px;
+  background-color:#fff;
+  font-weight:500;
+  margin:15px 0;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  display:flex;
+  align-items:center;
+  position:relative;
+  transform: translateX(100%);
+  animation: moveleft 0.2s linear forwards;
+}
+@keyframes moveleft 
+{
+  100% 
+  {
+    transform: translatex(0);
+  }
+}
+.toast i 
+{
+  margin:0 20px;
+  font-size:35px;
+  color:green;
+}
+.toast::after 
+{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:5px;
+  background: green;
+  animation: decreasing 6s linear forwards;
+}
+@keyframes decreasing 
+{
+  100% 
+  {
+    width:0;
+  }
+}
+    </style>
+</body>
+</html>
